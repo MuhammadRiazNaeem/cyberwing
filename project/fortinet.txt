@@ -1,0 +1,10 @@
+https://www.youtube.com/playlist?list=PLeDm5NI-1k3rrd1KRwASP82rO-_Wz4VN5
+
+config system interface
+edit port1
+set mode dhcp
+set allowaccess https http ssh telnet ping
+set defaultgw enable
+end
+show system interface
+

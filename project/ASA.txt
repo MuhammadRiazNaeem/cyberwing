@@ -1,0 +1,82 @@
+version 9.1
+show interfacce ip brief
+show route
+ON R1
+interface ethernet 0/0
+ip address 10.11.11.1 255.255.255.0
+no shutdown
+interface loop 0
+ip add 10.1.1.1 255.255.255.0
+interface loop 1
+ip address 10.10.10.1 255.255.255.0
+interface loop 2
+ip address 10.20.20.1 255.255.255.0
+interface ethernet 0/1
+ip address 10.20.20.1 255.255.255.0
+no shutdown
+ip route 0.0.0.0 0.0.0.0 10.11.11.10
+no shutdown
+...	...	...	...
+R2
+Configure terminal
+hostname R2
+interface ethernet 0/1
+ip address 192.1.20.2 255.255.255.0
+no shutdown
+interface loop 0
+ip address 10.2.2.1 255.255.255.0
+interface loop 1
+ip address 199.1.1.1 255.255.255.0
+interface loop 2
+ip address 200.1.1.1 255.255.255.0
+no shutdown
+ip route 0.0.0.0 0.0.0.0 192.168.3.10
+end
+...	...	...	...
+R3
+interface ethernet0/0
+ip address 192.168.3.3 255.255.255.0
+no shutdown
+interface loop 0
+ip address 10.3.3.1 255.255.255.0
+no shutdown
+ip route 0.0.0.0 0.0.0.0 192.168.3.10
+end
+...	...	...
+R4
+configure terminal
+hostname R4
+interface ethernet 0/0
+ip address 192.168.4.4 255.255.255.0
+no shutdown
+interface loop 0
+ip address 10.4.4.1 255.255.255.0
+no shut
+ip route 0.0.0.0 0.0.0.0 192.168.4.10
+end
+... 	
+
+
+
+
+
+ASA
+
+configure terminal
+show interface ip brief
+show version
+interface ethernet 0
+ip address 10.11.11.10 
+show run interface eth	0
+ip address 10.11.11.10 255.255.255.0
+nameif inside
+security-level 100
+no shutdown
+
+interface ethernet 0
+ip address 192.1.20.10
+show run interface ethernet 0
+nameif outside
+exit
+
+ip route 10.11.11.0 255.255.255.0 192.1.20.10
